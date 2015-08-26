@@ -1,4 +1,9 @@
 <?
+
+$wordFile = "plain.txt";
+$outFile = "chars.txt";
+
+
 function sortout($arr) {
 	arsort($arr);
 	return $arr;
@@ -27,13 +32,14 @@ function ref() {
 }
 
 function words($asString) {
+	global $wordFile;
 	if ($asString) {
-		$file = file_get_contents("words.txt");
+		$file = file_get_contents($wordFile);
 		$file = strtolower($file);
 		$file = trim($file);
 		return $file;
 	}
-	$file = file("words.txt");
+	$file = file($wordFile);
 	$file = array_map("strtolower", $file);
 	$file = array_map("trim", $file);
 	return $file;
@@ -47,13 +53,13 @@ function wordsToChars() {
 		$file1 = str_replace($k, $v, $file1);
 	endforeach;
 
-	$file2 = fopen("chars.txt", "w+");
+	$file2 = fopen($outFile, "w+");
 	fwrite($file2, $file1);
 	fclose($file2);
 }
 
 function charsInfo() {
-	$chars = array_map("trim", file("chars.txt"));
+	$chars = array_map("trim", file($outFile));
 
 	$unis = array_unique($chars);
 	// print_r(sortout($unis));
@@ -153,7 +159,8 @@ function findCollisions() {
 
 function printCollisions() {
 	$z = findCollisions();
-	print_r($z);
+	// print_r($z);
+	echo "this is baroke\n";
 	return;
 	foreach($z as $a=>$b):
 		asort($b);
@@ -173,7 +180,7 @@ function printCollisions() {
 // toAHK();
 // parseAHK();
 // findCollisions();
-printCollisions();
+// printCollisions();
 
 
 ?>
