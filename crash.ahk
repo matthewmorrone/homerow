@@ -1,24 +1,3 @@
-;Loop, read, crash.tsv
-;{
-;	Loop, parse, A_LoopReadLine, %A_Tab%
-;	{
-;		MsgBox, Field number %A_Index% is %A_LoopField%.
-;	}
-;}
-
-;;Create an object.
-;thing := {}
-;;Store a value.
-;thing.foo := "bar"
-;;Create a method by storing a function reference.
-;thing.test := Func("thing_test")
-;;Call the method.
-;thing.test()
-
-;thing_test(this) {
-;	MsgBox % this.foo
-;}
-
 #SingleInstance force
 
 ArrayToString(arr, bef:="[", aft:="]", mid:=", ") {
@@ -65,3 +44,5 @@ file.Close()
 
 Run, replace.ahk
 
+; ^(\w+)\t(\w+)\t(\w+)\t(\w+)\t(\w+)\n
+; $1\t$2 1\n$1\t$3 2\n$1\t$4 3\n$1\t$5 4\n

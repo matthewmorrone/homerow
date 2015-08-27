@@ -132,7 +132,21 @@ function findIso() {
 	endforeach;
 	return $iso;
 }
-
+function findUniques() {
+	$chars = array_map("trim", file("map.ahk"));
+	$crash = [];
+	$crash2 = [];
+	foreach($chars as $line):
+		$line = explode("::", $line);
+		$crash[$line[1]][] = $line[2];
+	endforeach;
+	foreach($crash as $k=>$entry):
+		if (count($entry) === 1) {
+			$crash2[$k] = $entry[0];
+		}
+	endforeach;
+	return $crash2;
+}
 function findCollisions() {
 	$chars = array_map("trim", file("map.ahk"));
 	$crash = [];
@@ -143,20 +157,17 @@ function findCollisions() {
 	endforeach;
 	foreach($crash as $k=>$entry):
 		if (count($entry) > 1) {
-			// $crash2[count($entry)][$k] = $entry;
-			// $crash2[count($entry)][$k][strlen($k)] = $entry;
 			$crash2[count($entry)][strlen($k)][$k] = $entry;
 		}
 	endforeach;
-	// print_r($crash[2]);
-	// print_r($crash[3]);
-	// print_r($crash[4]);
-	// print(count($crash[2]))."\n";
-	// print(count($crash[3]))."\n";
-	// print(count($crash[4]))."\n";
 	return $crash2;
 }
-
+function printUniques() {
+	$z = findUniques();
+	foreach($z as $a=>$b):
+		echo "$a\t$b\n";
+	endforeach;
+}
 function printCollisions() {
 	$z = findCollisions();
 	// print_r($z);
@@ -175,12 +186,24 @@ function printCollisions() {
 	endforeach;
 }
 
+function tsv2ahk() {
+	$z = file("all.tsv");
+	foreach($z as $a=>$b):
+		$line = explode("\t", $b);
+		$a = trim($line[0]);
+		$b = trim($line[1]);
+		echo "::$a::$b\n";
+	endforeach;
+}
+
 // generateMap();
 // charsInfo();
 // toAHK();
 // parseAHK();
 // findCollisions();
 // printCollisions();
-
+// findUniques();
+// printUniques();
+tsv2ahk();
 
 ?>
