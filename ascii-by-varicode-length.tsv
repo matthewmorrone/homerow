@@ -1,0 +1,10 @@
+1	1	SP
+2	1	e
+3	2	o t
+4	3	a i n
+5	5	LF CR l r s
+6	8	- c d f h m p u
+7	13	, . = A E I S T b g v w y
+8	21	HT ( ) 0 1 2 3 : B C D F G L M N O P R k x
+9	34	 ! " # $ ' * + / 4 5 6 7 8 9 ; < > H J K Q U V W X Y [ \ ] _ j q z |
+10	40	NUL SOH STX ETX EOT ENQ ACK BEL BS VT FF SO SI DLE DC1 DC2 DC3 DC4 NAK SYN ETB CAN EOM SUB ESC FS GS RS US % & ? @ Z ^ ` { } ~ DEL

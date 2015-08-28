@@ -16,7 +16,7 @@ out .= "#Singleinstance Force`n"
 out .= "#Include gui.ahk`n`n"
 Loop
 {
-	FileReadLine, line, crash.tsv, %A_Index%
+	FileReadLine, line, one-to-many.tsv, %A_Index%
 	if ErrorLevel
 		break
 	words := StrSplit(line, A_Tab)
