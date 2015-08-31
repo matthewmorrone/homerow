@@ -5,7 +5,7 @@
 ; 	word = %words%[A_Index]
 ; 	MsgBox %word%
 ; 	LV_Add("", A_Index, word)
-; LV_ModifyCol() 
+; LV_ModifyCol()
 #NoEnv
 
 #Warn All
@@ -42,25 +42,25 @@ SysGet, ScreenHeight, 79
 MaxWidth := 0
 BoxHeight := 100 ;height of the suggestions box in pixels
 
-ToGUI(str) 
+ToGUI(str)
 {
 	global
 	Gui, Destroy
 
-	; local 
-	; gOutput 
+	; local
+	; gOutput
 	; Gui, Font, s14 c885555
-	Gui, Add, ListBox, x0 y0, %str% 
+	Gui, Add, ListBox, x0 y0, %str%
 	Gui, Add, Button, Default, OK
 	; Gui, +Delimiter`n
 	Gui, +ToolWindow -Caption +AlwaysOnTop +LastFound
 	; Gui, -SysMenu
-	; Gui, +LastFound 
+	; Gui, +LastFound
 	; Gui, +E0x08000000
 	; Gui, -Border
 	; hWindow := WinExist()
 
-	
+
 
 	; PosX := A_CaretX + OffsetX
 	; If PosX + MaxWidth > ScreenWidth ;past right side of the screen
@@ -70,7 +70,7 @@ ToGUI(str)
 	;     PosY := ScreenHeight - BoxHeight
 	Gui, Show, NA
  	; Gui, Show, AutoSize Center NoActivate
-		
+
 
 
 
