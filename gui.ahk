@@ -8,6 +8,144 @@
 ; LV_ModifyCol()
 #NoEnv
 
+EnabledKeyList := "a`ns`nd`nf`ng`nh`nj`nk`nl"
+DisabledKeyList := "q`nw`ne`nr`nt`ny`nu`ni`no`np`nz`nx`nc`nv`nb`nn`nm"
+Loop, Parse, EnabledKeyList, `n
+{
+    Hotkey, ~%A_LoopField%, EnabledKey, UseErrorLevel
+    Hotkey, ~+%A_LoopField%, EnabledShiftedKey, UseErrorLevel
+}
+
+Loop, Parse, DisabledKeyList, `n
+{
+    Hotkey, ~%A_LoopField%, DisabledKey, UseErrorLevel
+    Hotkey, ~+%A_LoopField%, DisabledShiftedKey, UseErrorLevel
+}
+
+EnabledKey:
+CurrentWord .= SubStr(A_ThisHotkey,2)
+MsgBox %CurrentWord%
+Gosub, Suggest
+Return
+
+EnabledShiftedKey:
+Char := SubStr(A_ThisHotkey,3)
+StringUpper, Char, Char
+CurrentWord .= Char
+Gosub, Suggest
+Return
+
+DisabledKey:
+return
+
+DisabledShiftedKey:
+return
+
+
+; #IfWinExist AutoComplete ahk_class AutoHotkeyGUI
+
+; ~LButton::
+; MouseGetPos,,, Temp1
+; If (Temp1 != hWindow)
+;     Gosub, ResetWord
+; Return
+
+; Up::
+; Gui, Suggestions:Default
+; GuiControlGet, Temp1,, Matched
+; If Temp1 > 1 ;ensure value is in range
+;     GuiControl, Choose, Matched, % Temp1 - 1
+; Return
+
+; Down::
+; Gui, Suggestions:Default
+; GuiControlGet, Temp1,, Matched
+; GuiControl, Choose, Matched, % Temp1 + 1
+; Return
+
+; !1::
+; !2::
+; !3::
+; !4::
+; !5::
+; !6::
+; !7::
+; !8::
+; !9::
+; !0::
+; Gui, Suggestions:Default
+; KeyWait, Alt
+; Key := SubStr(A_ThisHotkey, 2, 1)
+; GuiControl, Choose, Matched, % Key = 0 ? 10 : Key
+; Gosub, SendWord
+; Return
+
+; #IfWinExist
+
+
+
+; Gui, Suggestions:Default
+; Gui, Font, s10, Courier New
+; Gui, Add, ListBox, vMatched gSendWord AltSubmit
+; Gui, -Caption +ToolWindow
+; ; +AlwaysOnTop +LastFound
+; hWindow := WinExist()
+; Gui, Show
+;, h165 Hide, AutoComplete
+
+
+; Gui, Suggestions:Default
+; 
+; Gui, Add, ListBox, vWord gSendWord AltSubmit;, %DisplayList%
+; Gui, -Caption +ToolWindow +AlwaysOnTop +LastFound
+; hWindow := WinExist()
+
+
+Suggest:
+
+Gui, Suggestions:Default
+
+
+
+; MsgBox,,, % MatchList.MaxIndex() " " DisplayList, 2
+
+GuiControl,, Matched, %DisplayList%
+GuiControl, Choose, Matched, 1
+
+Gui, Show
+return
+
+
+GetWord:
+
+GuiControlGet, Index, , Matched
+Gui, Suggestions:Default
+Gui, Destroy
+NewWord := MatchList[Index]
+SendWord(CurrentWord,NewWord)
+Gosub, ResetWord
+
+return
+
+
+
+
+
+
+; If (MatchList.MaxIndex() = 0)
+; {
+; 	; Gui, Suggestions:Hide
+; 	Gosub, ResetWord
+;     Return
+; }
+; If (MatchList.MaxIndex() = 1)
+; {
+; 	; Gui, Suggestions:Hide
+; 	SendWord(CurrentWord,MatchList[1])
+;     Return
+; }
+
+
 #Warn All
 #Warn LocalSameAsGlobal, Off
 
