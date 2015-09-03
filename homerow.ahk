@@ -2,6 +2,7 @@
 
 #SingleInstance force
 
+
 #Warn All
 #Warn LocalSameAsGlobal, Off
 
@@ -29,6 +30,8 @@ OtherKeyList := "'`n-" ;list of key names separated by `n that make up words
 ResetKeyList := "Home`nPGUP`nPGDN`nEnd`nLeft`nRight`nRButton`nMButton`n,`n.`n/`n[`n]`n;`n\`n=`n```n"""  ;list of key names separated by `n that cause suggestions to reset
 ResetKeyList .= "`nq`nw`ne`nr`nt`ny`nu`ni`no`np`nz`nx`nc`nv`nb`nn`nm"
 TriggerKeyList := "Tab`nEnter`nSpace" ;list of key names separated by `n that trigger completion
+
+
 
 TrayTip, Settings, Click the tray icon to modify settings, 5, 1
 
